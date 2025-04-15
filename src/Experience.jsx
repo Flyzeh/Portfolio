@@ -1,11 +1,20 @@
 import { Text, Html, Float, Environment, useGLTF, PresentationControls, ContactShadows} from '@react-three/drei'
-import useIsMobile from './index.js'
+import { useEffect, useState } from 'react'
 
 export default function Experience()
 {
 
     const computer = useGLTF('https://threejs-journey.com/resources/models/macbook_model.gltf')  
-    const isMobile = useIsMobile()
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+    
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return <>
 
@@ -15,7 +24,7 @@ export default function Experience()
 
         <PresentationControls
             global
-            rotation={isMobile ? [0, 0.3, 0] : [0.13, 0.1, 0]}
+            rotation={ [0.13, 0.1, 0] }
             polar={ [-0.4, 0.2] }
             azimuth={ [-1, 0.75] }
             config={ {mass: 2, tension: 400} }
@@ -33,12 +42,13 @@ export default function Experience()
                 <primitive 
                     object={computer.scene}
                     position-y={-1.2}
+                    scale={isMobile ? 0.6 : 1}
                 >
                     <Html
                         transform
                         wrapperClass='htmlScreen'
-                        distanceFactor={isMobile ? 1.5 : 1.17}
-                        position={[0, 1.56, -1.4]}
+                        distanceFactor={1.17}
+                        position={isMobile ? [0, 1.25, -1.4] : [0, 1.56, -1.4]}
                         rotation-x={- 0.256}
                     >
                         <iframe src="https://giani-negroni-html.vercel.app/" ></iframe>
