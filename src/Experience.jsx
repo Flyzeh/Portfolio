@@ -1,10 +1,11 @@
 import { Text, Html, Float, Environment, useGLTF, PresentationControls, ContactShadows} from '@react-three/drei'
+import useIsMobile from 'src/index.js'
 
 export default function Experience()
 {
 
     const computer = useGLTF('https://threejs-journey.com/resources/models/macbook_model.gltf')  
-    console.log(computer)
+    const isMobile = useIsMobile()
 
     return <>
 
@@ -14,7 +15,7 @@ export default function Experience()
 
         <PresentationControls
             global
-            rotation={ [0.13, 0.1, 0] }
+            rotation={isMobile ? [0, 0.3, 0] : [0.13, 0.1, 0]}
             polar={ [-0.4, 0.2] }
             azimuth={ [-1, 0.75] }
             config={ {mass: 2, tension: 400} }
@@ -36,7 +37,7 @@ export default function Experience()
                     <Html
                         transform
                         wrapperClass='htmlScreen'
-                        distanceFactor={1.17}
+                        distanceFactor={isMobile ? 1.5 : 1.17}
                         position={[0, 1.56, -1.4]}
                         rotation-x={- 0.256}
                     >
