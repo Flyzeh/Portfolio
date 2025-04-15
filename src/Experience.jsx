@@ -1,5 +1,5 @@
 import { Text, Html, Float, Environment, useGLTF, PresentationControls, ContactShadows} from '@react-three/drei'
-import useIsMobile from 'src/index.js'
+import useIsMobile from './index.js'
 
 export default function Experience()
 {
