@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run clean && vite build",
-    "clean": "rm -rf dist",
+    "build": "vite build",
     "deploy": "vercel --prod"
   },
   "devDependencies": {
